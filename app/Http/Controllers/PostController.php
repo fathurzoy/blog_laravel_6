@@ -86,6 +86,11 @@ class PostController extends Controller
     public function edit($id)
     {
         //
+        $tags = Tags::all();
+        $category = Category::all();
+        $post = Posts::findorfail($id);
+
+        return view('admin.post.edit', compact('post', 'tags', 'category'));
     }
 
     /**
@@ -97,7 +102,41 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'judul' => 'required',
+            'category_id' => 'required',
+            'content' => 'required',
+        ]);
+
+        $post = Posts::findorfail($id);
+
+        if($request->has('gambar')){
+            $gambar = $request->gambar;
+            $new_gambar = time().$gambar->getClientOriginalName();
+
+            $gambar->move('public/uploads/posts/', $new_gambar);
+
+            $post_data = [
+                'judul' => $request->judul,
+                'category_id' => $request->category_id,
+                'content' => $request->content,
+                'gambar' => 'public/uploads/posts/'.$new_gambar,
+                'slug' => Str::slug($request->judul)
+            ];
+        }else{
+            $post_data = [
+                'judul' => $request->judul,
+                'category_id' => $request->category_id,
+                'content' => $request->content,
+                'slug' => Str::slug($request->judul)
+            ];
+        };
+
+        
+
+        $post->tags()->sync($request->tags);
+        $post->update($post_data);
+        return redirect()->back()->with('success', 'Postingan anda berhasil diupdate');
     }
 
     /**
