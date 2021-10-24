@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Category;
 use App\Posts;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
@@ -54,6 +55,7 @@ class PostController extends Controller
             'category_id' => $request->category_id,
             'content' => $request->content,
             'gambar' => 'public/uploads/posts/'.$new_gambar,
+            'slug' => Str::slug($request->judul)
         ]);
 
         $gambar->move('public/uploads/posts/', $new_gambar);
