@@ -82,7 +82,7 @@
 							<div class="dropdown">
 								<div class="dropdown-body">
 									<ul class="dropdown-list">
-											@foreach ($category as $result)
+											@foreach ($category_widget as $result)
 												<li><a href="#">{{ $result->name }} </a></li>
 											@endforeach
 									</ul>
