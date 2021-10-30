@@ -6,7 +6,7 @@
 
     <div id="post-header" class="page-header">
         <div class="page-header-bg" style="
-        background-image: url( {{asset($isi_post->gambar) }} );" 
+        background-image: url( {{asset($isi_post->gambar) }} ); " 
 
         data-stellar-background-ratio="0.5"></div>
         <div class="container">
