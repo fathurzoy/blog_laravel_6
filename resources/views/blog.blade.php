@@ -83,9 +83,9 @@
 								<a class="post-img" href="{{ route('blog.isi', $post_terbaru->slug) }}"><img src="{{ $post_terbaru->gambar }}" alt=""></a>
 								<div class="post-body">
 									<div class="post-category">
-										<a href="category.html">{{ $post_terbaru->category->name }}</a>
+										<a href="#">{{ $post_terbaru->category->name }}</a>
 									</div>
-									<h3 class="post-title"><a href="#">{{ $post_terbaru->judul }}</a></h3>
+									<h3 class="post-title"><a href="{{ route('blog.isi', $list_post->slug ) }}">{{ $post_terbaru->judul }}</a></h3>
 									<ul class="post-meta">
 										<li><a href="#" >{{ $post_terbaru->users->name }}</a></li>
 										<li> {{\Carbon\Carbon::parse($post_terbaru['created_at'])->diffForHumans() }}</li>
