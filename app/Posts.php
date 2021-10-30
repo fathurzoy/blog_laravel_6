@@ -11,14 +11,20 @@ class Posts extends Model
 
     use SoftDeletes;
 
-    protected $fillable = ['judul', 'category_id', 'content', 'gambar', 'slug'];
+    protected $fillable = ['judul', 'category_id', 'content', 'gambar', 'slug', "users_id"];
 
     public function category(){
     	return $this->belongsTo('App\Category');
     }
 
+
     public function tags(){
         return $this->belongsToMany('App\Tags');
     }
 
+    //many to one
+    public function users(){
+        return $this->belongsTo('App\User');
+        // return $this->belongsTo('App\User', 'user_id','id');
+    }
 }
